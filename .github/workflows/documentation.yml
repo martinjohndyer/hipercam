@@ -13,23 +13,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Install build dependencies
-        run: |
-          pip install --upgrade pip setuptools wheel
-          pip install numpy Cython setuptools_scm
       - name: Install documentation dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme myst_parser numpydoc sphinx-astropy
-      - name: Install package dependencies
-        run: |
-          pip install astropy fitsio keyring matplotlib numba pandas requests sep websocket-client urllib3
-      - name: Install package
-        run: |
-          pip install -e .
-      - name: Verify installation
-        run: |
-          python -c "import hipercam; print(f'HiPERCAM version: {hipercam.__version__}')"
-          python -c "from importlib.metadata import version; print(f'Package version: {version(\"hipercam\")}')"
+          pip install --upgrade pip setuptools wheel
+          pip install sphinx sphinx_rtd_theme myst_parser numpydoc sphinx-astropy setuptools_scm
       - name: Sphinx build
         run: |
           sphinx-build docs _build
