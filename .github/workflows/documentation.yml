@@ -13,6 +13,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
+      - name: Install hipercam package
+        run: |
+          pip install --upgrade pip setuptools wheel setuptools_scm
+          pip install .
       - name: Install documentation dependencies
         run: |
           pip install --upgrade pip setuptools wheel setuptools_scm
