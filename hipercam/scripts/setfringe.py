@@ -11,22 +11,26 @@ import matplotlib as mpl
 
 backend = mpl.get_backend()
 
-if backend == "Qt4Agg" or "Qt5Agg":
-    from matplotlib.backends.backend_qt5 import cursord as curs
-elif backend == "GTK3agg":
-    from matplotlib.backends.backend_gtk3 import cursord as curs
-else:
+# Try to configure cursors for interactive backends
+curs = None
+try:
+    if backend in ("Qt4Agg", "Qt5Agg"):
+        from matplotlib.backends.backend_qt5 import cursord as curs
+    elif backend == "GTK3Agg":
+        from matplotlib.backends.backend_gtk3 import cursord as curs
+except (ImportError, AttributeError):
+    # Backend not available or mocked during docs build
     curs = None
 
 if curs is not None:
-    from matplotlib.backend_bases import cursors
-
     try:
+        from matplotlib.backend_bases import cursors
         curs[cursors.HAND] = curs[cursors.POINTER]
         curs[cursors.WAIT] = curs[cursors.POINTER]
         curs[cursors.SELECT_REGION] = curs[cursors.POINTER]
         curs[cursors.MOVE] = curs[cursors.POINTER]
-    except AttributeError:
+    except (AttributeError, TypeError, KeyError):
+        # Cursor modification not supported or backend is mocked
         pass
 
 import matplotlib.pyplot as plt

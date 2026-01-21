@@ -23,6 +23,9 @@ PROJECT_ROOT = os.path.abspath(os.path.join(DOCS_ROOT, '..'))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+# Force a non-GUI backend to avoid Qt requirements during autodoc
+os.environ.setdefault('MPLBACKEND', 'Agg')
+
 # Lightly mock heavy/optional deps so autodoc can run without installing them
 autodoc_mock_imports = [
     'astropy',
