@@ -26,29 +26,14 @@ if PROJECT_ROOT not in sys.path:
 # Force a non-GUI backend to avoid Qt requirements during autodoc
 os.environ.setdefault('MPLBACKEND', 'Agg')
 
-# Lightly mock heavy/optional deps so autodoc can run without installing them
+# We can't install pgplot in the doc build environment.
+# But we can tell Sphinx to mock it so that the  imports in hipercam
+# succeed, allowing autodoc to work.
+# We also provide a minimal trm.pgplot stub with some PG functions,
+# so that code using these functions can be parsed by autodoc.
 autodoc_mock_imports = [
-    'astropy',
-    'fitsio',
-    'numba',
-    'pandas',
-    'requests',
-    'sep',
-    'PyQt5',
-    'PySide2',
-    'PySide6',
-    'matplotlib.backends.backend_qt5',
-    'matplotlib.backends.backend_qt4',
-    'matplotlib.backends.backend_qt5agg',
-    'matplotlib.backends.backend_qt5cairo',
-    'matplotlib.backends.qt_compat',
-    'trm',
-    'trm.cline',
-    'trm.utils',
     'trm.pgplot',
 ]
-
-# Provide a minimal trm.pgplot stub so hipercam imports succeed during docs
 if 'trm.pgplot' not in sys.modules:
     pgplot_stub = types.ModuleType('trm.pgplot')
 
