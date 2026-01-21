@@ -13,13 +13,77 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+import types
+
+# Make the project importable when building docs locally/CI
+DOCS_ROOT = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(DOCS_ROOT, '..'))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+# Lightly mock heavy/optional deps so autodoc can run without installing them
+autodoc_mock_imports = [
+    'astropy',
+    'fitsio',
+    'numba',
+    'pandas',
+    'requests',
+    'sep',
+    'PyQt5',
+    'PySide2',
+    'PySide6',
+    'matplotlib.backends.backend_qt5',
+    'matplotlib.backends.backend_qt4',
+    'matplotlib.backends.backend_qt5agg',
+    'matplotlib.backends.backend_qt5cairo',
+    'matplotlib.backends.qt_compat',
+    'trm',
+    'trm.cline',
+    'trm.utils',
+    'trm.pgplot',
+]
+
+# Provide a minimal trm.pgplot stub so hipercam imports succeed during docs
+if 'trm.pgplot' not in sys.modules:
+    pgplot_stub = types.ModuleType('trm.pgplot')
+
+    class PGdevice:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    class PGPlotError(Exception):
+        pass
+
+    def _nop(*args, **kwargs):
+        return None
+
+    def pgbeg(*args, **kwargs):
+        return 1
+
+    def pgend(*args, **kwargs):
+        return None
+
+    def pgscr(*args, **kwargs):
+        return None
+
+    def pgpap(*args, **kwargs):
+        return None
+
+    pgplot_stub.PGdevice = PGdevice
+    pgplot_stub.PGPlotError = PGPlotError
+    pgplot_stub.pgbeg = pgbeg
+    pgplot_stub.pgend = pgend
+    pgplot_stub.pgscr = pgscr
+    pgplot_stub.pgpap = pgpap
+    pgplot_stub.__all__ = ['PGdevice', 'PGPlotError', 'pgbeg', 'pgend', 'pgscr', 'pgpap']
+
+    def __getattr__(name):
+        return _nop
+
+    pgplot_stub.__getattr__ = __getattr__
+    sys.modules['trm.pgplot'] = pgplot_stub
 
 # Import the theme package
 import astropy_sphinx_theme
