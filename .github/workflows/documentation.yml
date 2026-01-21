@@ -16,7 +16,7 @@ jobs:
       - name: Install documentation dependencies
         run: |
           pip install --upgrade pip setuptools wheel setuptools_scm
-          pip install sphinx sphinx_rtd_theme myst_parser numpydoc sphinx-astropy
+          pip install sphinx sphinx_rtd_theme myst_parser numpydoc astropy-sphinx-theme sphinx-astropy
       - name: Sphinx build
         run: |
           sphinx-build docs _build

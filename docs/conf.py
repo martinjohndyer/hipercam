@@ -21,6 +21,9 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+# Import the theme package
+import astropy_sphinx_theme
+
 
 # -- General configuration ------------------------------------------------
 
@@ -101,6 +104,7 @@ todo_include_todos = False
 #html_theme = 'alabaster'
 #html_theme = 'classic'
 html_theme = 'bootstrap-astropy'
+html_theme_path = astropy_sphinx_theme.get_html_theme_path()
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
