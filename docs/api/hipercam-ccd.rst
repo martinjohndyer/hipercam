@@ -5,7 +5,7 @@
 hipercam.ccd
 ************
 
-.. automodule:: hipercam.ccd
+.. autoapimodule:: hipercam.ccd
 
    .. rubric:: Classes summary
 
@@ -14,10 +14,10 @@ hipercam.ccd
       CCD
       MCCD
 
-   .. autoclass:: CCD
+   .. autoapiclass:: CCD
       :show-inheritance:
       :members:
 
-   .. autoclass:: MCCD
+   .. autoapiclass:: MCCD
       :show-inheritance:
       :members:

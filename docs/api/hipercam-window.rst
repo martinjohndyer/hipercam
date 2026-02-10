@@ -5,7 +5,7 @@
 hipercam.window
 ***************
 
-.. automodule:: hipercam.window
+.. autoapimodule:: hipercam.window
 
    .. rubric:: Classes summary
 
@@ -16,33 +16,18 @@ hipercam.window
       CcdWin
       MccdWin
 
-   .. autoclass:: Winhead
+   .. autoapiclass:: Winhead
       :show-inheritance:
       :members:
 
-   .. autoclass:: Window
+   .. autoapiclass:: Window
       :show-inheritance:
       :members:
 
-   .. autoclass:: CcdWin
+   .. autoapiclass:: CcdWin
       :show-inheritance:
       :members:
 
-   .. autoclass:: MccdWin
+   .. autoapiclass:: MccdWin
       :show-inheritance:
       :members:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

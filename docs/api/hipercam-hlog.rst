@@ -5,7 +5,7 @@
 hipercam.hlog
 *************
 
-.. automodule:: hipercam.hlog
+.. autoapimodule:: hipercam.hlog
 
    .. rubric:: Classes summary
 
@@ -14,26 +14,10 @@ hipercam.hlog
       Hlog
       Tseries
 
-   .. autoclass:: Hlog
+   .. autoapiclass:: Hlog
       :show-inheritance:
       :members:
 
-   .. autoclass:: Tseries
+   .. autoapiclass:: Tseries
       :show-inheritance:
       :members:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
